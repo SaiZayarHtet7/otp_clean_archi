@@ -53,16 +53,20 @@ class _FillOTPState extends State<FillOTP> {
                   height: 50,
                   child: BlocBuilder<OtpCheckCubit, String>(
                     builder: (context, otpAdd) {
-                      return MyOTPField(
-                        color: otpAdd.length < 6
-                            ? ColorUtils.primaryColor
-                            : otpAdd == widget.otpFromServer
-                                ? ColorUtils.successColor
-                                : ColorUtils.errorColor,
-                        numberOfFields: 6,
-                        onCompleted: (String value) {
-                          context.read<OtpCheckCubit>().checkOTP(otpAdd: value);
-                        },
+                      return FittedBox(
+                        child: MyOTPField(
+                          color: otpAdd.length < 6
+                              ? ColorUtils.primaryColor
+                              : otpAdd == widget.otpFromServer
+                                  ? ColorUtils.successColor
+                                  : ColorUtils.errorColor,
+                          numberOfFields: 6,
+                          onCompleted: (String value) {
+                            context
+                                .read<OtpCheckCubit>()
+                                .checkOTP(otpAdd: value);
+                          },
+                        ),
                       );
                     },
                   ),
